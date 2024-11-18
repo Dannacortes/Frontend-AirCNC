@@ -4,10 +4,24 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 
+// Definición de la interfaz User (solo para el frontend)
+interface User {
+  user_id: string;
+  username: string;
+  email?: string;
+  profilePicture?: string;
+  biography?: string;
+  phoneNumber?: string;
+  verified?: boolean;
+  preferences?: string;
+}
+
 @Component({
   selector: 'app-profile',
+  standalone: true,
+  imports: [CommonModule, RouterModule, FormsModule], // Módulos necesarios para frontend
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
   currentUser: User | null = null;
@@ -16,11 +30,12 @@ export class ProfileComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    // Solo se carga el perfil simulado en el frontend
     this.loadUserProfile();
   }
 
   loadUserProfile(): void {
-    // Aquí cargaríamos el usuario de alguna forma, por ejemplo, desde un servicio
+    // Se establece un perfil de usuario simulado en el frontend
     this.currentUser = {
       user_id: '123',
       username: 'john_doe',
@@ -78,7 +93,7 @@ export class ProfileComponent implements OnInit {
     });
 
     if (formValues) {
-      // Aquí actualizaríamos el perfil del usuario, probablemente con una llamada a la API
+      // Actualiza el perfil en el frontend (sin backend)
       const updatedUser: User = {
         ...this.currentUser!,
         username: formValues.username,
@@ -89,7 +104,7 @@ export class ProfileComponent implements OnInit {
         verified: formValues.verified,
       };
 
-      // Actualiza el usuario localmente o realiza llamada a la API
+      // Actualiza el usuario localmente
       this.currentUser = updatedUser;
 
       Swal.fire('¡Éxito!', 'Perfil actualizado con éxito.', 'success');
@@ -102,37 +117,23 @@ export class ProfileComponent implements OnInit {
       return;
     }
     const file: File = inputFile.files[0];
-    const fileName = uuidv4();
-    const folderName = this.currentUser!.username + '/profile';
+    const fileName = uuidv4();  // Simula un nombre único de archivo
+    const folderName = this.currentUser!.username + '/profile';  // Carpeta para la imagen (solo frontend)
 
-    // Aquí llamamos a un servicio de backend para cargar la imagen de perfil
-    // Simulación de respuesta con la URL del archivo cargado
+    // Simula la respuesta con la URL de la imagen cargada
     const response = {
       profilePictureUrl: `https://example.com/uploads/${fileName}`,
     };
 
-    // Actualiza la URL del archivo de perfil
+    // Actualiza la URL de la foto de perfil
     const updatedUser: User = {
       ...this.currentUser!,
       profilePicture: response.profilePictureUrl,
     };
 
-    // Actualiza el usuario localmente
+    // Actualiza el usuario localmente (sin enviar al backend)
     this.currentUser = updatedUser;
 
     Swal.fire('¡Éxito!', 'Foto de perfil actualizada.', 'success');
   }
-}
-
-// Definición de la interfaz User
-interface User {
-  user_id: string;
-  username: string;
-  password: string;
-  email?: string;
-  profilePicture?: string;
-  biography?: string;
-  phoneNumber?: string;
-  verified?: boolean;
-  preferences?: string;
 }

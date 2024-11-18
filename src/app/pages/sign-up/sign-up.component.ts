@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { REACTIVE_NODE } from '@angular/core/primitives/signals';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../../interfaces/user.interface';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../app/core/auth/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -139,31 +137,32 @@ Swal.fire({
 
       return;
     }
-
-const newUser:User={
-    username : this.signUpForm.value.username ?? '',
-    password : this.signUpForm.value.password ?? '',
-    email: this.signUpForm.value.email ?? '',
-
- }
-    let retypepassword = this.signUpForm.value.retypepassword
-
-
-    if (!this.validateUsername(newUser.username)) {
-
-    } else if (!this.validatePassword(newUser.password)) {
-      return;
-    } else if (retypepassword! !== newUser.password) {
-        Swal.fire("Las contraseñas no coinciden")
-      return;
-    } else {
-
-      localStorage.setItem(newUser.username, JSON.stringify(newUser));
-      this.auth.login(newUser.username)
-      this.router.navigateByUrl('/home')
-       Swal.fire("Usuario registrado con exito")
-    }
   }
+
+// const newUser:User={
+//     username : this.signUpForm.value.username ?? '',
+//     password : this.signUpForm.value.password ?? '',
+//     email: this.signUpForm.value.email ?? '',
+
+//  }
+//     let retypepassword = this.signUpForm.value.retypepassword
+
+
+//     if (!this.validateUsername(newUser.username)) {
+
+//     } else if (!this.validatePassword(newUser.password)) {
+//       return;
+//     } else if (retypepassword! !== newUser.password) {
+//         Swal.fire("Las contraseñas no coinciden")
+//       return;
+//     } else {
+
+//       localStorage.setItem(newUser.username, JSON.stringify(newUser));
+//       this.auth.login(newUser.email)
+//       this.router.navigateByUrl('/home')
+//        Swal.fire("Usuario registrado con exito")
+//     }
+//   }
 
 
 }

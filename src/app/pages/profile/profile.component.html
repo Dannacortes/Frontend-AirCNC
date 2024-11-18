@@ -16,7 +16,7 @@
         <a (click)="openUpdateProfileModal()" class="login-btn">
           <i class="fas fa-edit"></i>
         </a>
-      
+
       <input type="file" id="file-input" (change)="onUpload($event)" style="display: none;">
       <label for="file-input" class="btn upload-btn">
         <i class="fas fa-upload"></i>
@@ -32,7 +32,7 @@
       <textarea class="bio-preferences" readonly>{{ currentUser?.preferences }}</textarea>
 
 
-     
+
     </div>
   </div>
 </div>
@@ -49,6 +49,6 @@
 <a [routerLink]="['/login']" class="create-profile-btn">¡Inicia sesión!</a>
 
       </div>
-    
+
   </div>
 </ng-template>

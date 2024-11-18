@@ -1,20 +1,32 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'  // Esto asegura que el servicio esté disponible globalmente
+  providedIn: 'root'
 })
 export class AuthService {
+  private currentUser: any = null;  // Variable para almacenar el usuario actual
+
   constructor() {}
 
-  login(username: string, password: string) {
-    // Lógica de autenticación, por ejemplo, con Supabase
-    return new Promise((resolve, reject) => {
-      // Simulación de autenticación
-      if (username === 'admin' && password === 'admin') {
-        resolve({ username });
-      } else {
-        reject('Credenciales incorrectas');
-      }
-    });
+  // // Simulando el login para este ejemplo
+  // login(email: string, password: string) {
+  //   return new Promise((resolve, reject) => {
+  //     if (username === 'admin' && password === 'admin') {
+  //       this.currentUser = { username }; // Guardamos el usuario autenticado
+  //       resolve({ username });
+  //     } else {
+  //       reject('Credenciales incorrectas');
+  //     }
+  //   });
+  // }
+
+  // Método para obtener el usuario actual
+  getCurrentUser() {
+    return this.currentUser;  // Retorna el usuario actual
+  }
+
+  // Método para cerrar sesión
+  logout() {
+    this.currentUser = null;  // Limpiamos la información del usuario
   }
 }
