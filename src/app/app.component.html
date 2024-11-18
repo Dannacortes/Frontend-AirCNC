@@ -1,0 +1,18 @@
+
+
+<div class="main-container">
+<app-navbar></app-navbar>
+<div class="content">
+
+
+<router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>
+</div>
+
+<div>
+  <h1>Items:</h1>
+  <ul>
+    <li *ngFor="let item of items">{{ item }}</li>
+  </ul>
+</div>
